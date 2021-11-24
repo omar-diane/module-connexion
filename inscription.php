@@ -1,58 +1,73 @@
-<?php
-
-mysqli_connect('localhost', 'root', '','moduleconnexion');
-// on teste si le visiteur a soumis le formulaire
-if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription') {
-	// on teste l'existence de nos variables. On teste également si elles ne sont pas vides
-	if ((isset($_POST['login']) && !empty($_POST['login'])) && (isset($_POST['pass']) && !empty($_POST['pass'])) && (isset($_POST['pass_confirm']) && !empty($_POST['pass_confirm']))) {
-	// on teste les deux mots de passe
-	if ($_POST['pass'] != $_POST['pass_confirm']) {
-		$erreur = 'Les 2 mots de passe sont différents.';
-	}
-	else {
-		$base = mysqli_connect ('localhost', 'root', '', 'moduleconnexion');
-
-		// on recherche si ce login est déjà utilisé par un autre utilisateur
-		$sql = 'SELECT count(*) FROM utilisateurs WHERE login="'.mysqli_escape_string($_POST['login']).'"';
-		$req = mysqli_query($sql) or die('Erreur SQL !<br />'.$sql.'<br />'.mysqli_error());
-		$data = mysqli_fetch_array($req);
-
-		if ($data[0] == 0) {
-		$sql = 'INSERT INTO utilisateurs VALUES("", "'.mysqli_escape_string($_POST['login']).'", "'.mysqli_escape_string(md5($_POST['pass'])).'")';
-		mysqli_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysqli_error());
-
-		session_start();
-		$_SESSION['login'] = $_POST['login'];
-		header('Location: connexion.php');
-		exit();
-		}
-		else {
-		$erreur = 'Un utilisateur possède déjà ce login.';
-		}
-	}
-	}
-	else {
-	$erreur = 'Au moins un des champs est vide.';
-	}
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Inscription</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription</title>
+    <link rel="stylesheet" href="moduleconnexion.css">
 </head>
 <body>
-	<form action="" align="center">
-		<label for=""> Login <input type="text" name="login"></label>
-		<label for=""> Nom <input type="text" name="name"></label>
-		<label for=""> Prenom <input type="text" name="prenom"></label>
-		<label for=""> Mot de passe <input type="password" name="pass"></label>
-		<label for=""> Confirmation de mot passe <input type="password" name="passconfirm"></label>
-		<input type="submit" value="S'inscrire">
-	</form>
+<header>
+        <nav>
+            <a href="#">Acceuil</a>
+            <a href="connexion.php">Coonexion</a>
+            <a href="inscription.php">Inscription</a>
+        </nav>
+    </header>
+
+<?php
+
+require('config.php');
+
+if (isset($_REQUEST['login'], $_REQUEST['name'], $_REQUEST['prenom'], $_REQUEST['password'])){
+    // récupérer le login 
+    $login = stripslashes($_REQUEST['login']);
+    $login = mysqli_real_escape_string($conn, $login); 
+    // récupérer le nom 
+    $name = stripslashes($_REQUEST['name']);
+    $name = mysqli_real_escape_string($conn, $name);
+    // récupérer le prénom
+    $prenom = stripslashes($_REQUEST['prenom']);
+    $prenom = mysqli_real_escape_string($conn, $prenom);
+    // récupérer le mot de passe 
+    $password = stripslashes($_REQUEST['password']);
+    $password = mysqli_real_escape_string($conn, $password);
+
+    $query = "INSERT into utilisateurs (login, name, prenom, password)
+        VALUES ('$login', '$name', '$prenom', '".hash('sha256', $password)."')";
+
+$res = mysqli_query($conn, $query);
+if($res){
+   echo "<div class='sucess'>
+         <h3>Vous êtes inscrit avec succès.</h3>
+         <p>Cliquez ici pour vous <a href='connexion.php'>connecter</a></p>
+   </div>";
+}
+}else{
+?>
+<form class="box" action="" method="post">
+    <h1 class="box-title">S'inscrire</h1>
+  <input type="text" class="box-input" name="login" 
+  placeholder="Login" required />
+  
+    <input type="text" class="box-input" name="name" 
+  placeholder="Nom" required />
+  
+    <input type="text" class="box-input" name="prenom" 
+  placeholder="Prénom" required />
+
+  <input type="password" class="box-input" name="password" 
+  placeholder="Mot de passe" required />
+
+
+    <input type="submit" name="submit" 
+  value="S'inscrire" class="box-button" />
+  
+    <p class="box-register">Déjà inscrit? 
+  <a href="connexion.php">Connectez-vous ici</a></p>
+  <a href="index.php">Accueil</a>
+</form>
+<?php } ?>
 </body>
 </html>
