@@ -10,8 +10,8 @@
 <body>
 <header>
         <nav>
-            <a href="#">Acceuil</a>
-            <a href="connexion.php">Coonexion</a>
+            <a href="index.php">Accueil</a>
+            <a href="#">Coonexion</a>
             <a href="inscription.php">Inscription</a>
         </nav>
     </header>

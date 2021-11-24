@@ -10,9 +10,9 @@
 <body>
 <header>
         <nav>
-            <a href="#">Acceuil</a>
+            <a href="index.php">Accueil</a>
             <a href="connexion.php">Coonexion</a>
-            <a href="inscription.php">Inscription</a>
+            <a href="#">Inscription</a>
         </nav>
     </header>
 
@@ -60,13 +60,15 @@ if($res){
   <input type="password" class="box-input" name="password" 
   placeholder="Mot de passe" required />
 
+  <input type="password" class="box-input" name="passconfirm" 
+  placeholder="Confirmation du mot de passe" required />
+
 
     <input type="submit" name="submit" 
   value="S'inscrire" class="box-button" />
   
     <p class="box-register">Déjà inscrit? 
   <a href="connexion.php">Connectez-vous ici</a></p>
-  <a href="index.php">Accueil</a>
 </form>
 <?php } ?>
 </body>

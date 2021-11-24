@@ -2,13 +2,34 @@
     font-style: italic;
 }
 
+body {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: black;
+}
+
+header nav a {
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    -webkit-transition: color 1s;
+    transition: color 1s;
+    padding: 20px;
+}
+
+header nav a:hover {
+    color: #d2483c;
+}
+
 .box {
   border: 1px solid ;
   padding: 30px 25px 10px 25px;
   background: white;
   margin: 30px auto;
   width: 360px;
-    
 }
 
 .box .box-title {
@@ -48,4 +69,8 @@
     color: #fff;
     border: 0;
     outline:0;
+  }
+
+  footer {
+      background-color: black;
   }

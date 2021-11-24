@@ -8,16 +8,18 @@
 </head>
 <body>
     <header>
-
+        <nav>
+            <a href="index.php">Accueil</a>
+        </nav>
     </header>
     <main>
         <form action="">
             <h1>Modifier mon Profil</h1>
-        <input type="text" class="box-input" name="login" placeholder="Login">
-        <input type="text" class="box-input" name="name" placeholder="Nom">
-        <input type="text" class="box-input" name="prenom" placeholder="Prénom">
-        <input type="password" class="box-input" name="password" placeholder="Mot de passe">
-        <input type="submit" value="Soumettre" name="submit" class="box-button">
+        <input type="text" class="box-input" name="login" placeholder=" Nouveau login">
+        <input type="text" class="box-input" name="name" placeholder="Nouveau nom">
+        <input type="text" class="box-input" name="prenom" placeholder="Nouveau prénom">
+        <input type="password" class="box-input" name="password" placeholder="Nouveau mot de passe">
+        <input type="submit" value="Modifier" name="submit" class="box-button">
         </form>
     </main>
 </body>

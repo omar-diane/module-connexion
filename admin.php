@@ -8,7 +8,7 @@
 </head>
 <body>
 <?php
-require('../config.php');
+require('config.php');
 if (isset($_REQUEST['login'], $_REQUEST['name'], $_REQUEST['prenom'], $_REQUEST['password'])){
   // récupérer le login 
   $login = stripslashes($_REQUEST['login']);

@@ -74,7 +74,7 @@ if (isset($erreur)) echo '<br /><br />',$erreur;
 ?>
     </main>
     <footer>
-        
+        <a href="#">Github</a>
     </footer>
     
 </body>
