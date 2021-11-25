@@ -7,7 +7,7 @@
     <title>Connexion</title>
     <link rel="stylesheet" href="moduleconnexion.css">
 </head>
-<body>
+<body class='main'>
 <header>
         <nav>
             <a href="index.php">Accueil</a>
@@ -25,7 +25,7 @@ if (isset($_POST['username'])){
   $_SESSION['login'] = $login;
   $password = stripslashes($_REQUEST['password']);
   $password = mysqli_real_escape_string($conn, $password);
-    $query = "SELECT * FROM `utilisateurs` WHERE login='$login' 
+    $query = "SELECT * FROM `utilisateurs` WHERE login='tomvarchar13' 
   and password='".hash('sha256', $password)."'";
   
   $result = mysqli_query($conn,$query) or die(mysql_error());
@@ -43,6 +43,7 @@ if (isset($_POST['username'])){
   }
 }
 ?>
+<main>
 <form class="box" action="" method="post" name="login">
 <h1 class="box-title">Connexion</h1>
 <input type="text" class="box-input" name="login" placeholder="Login">
@@ -55,5 +56,9 @@ if (isset($_POST['username'])){
     <p class="errorMessage"><?php echo $message; ?></p>
 <?php } ?>
 </form>
+</main>
+<footer>
+  <a href="#">Github</a>
+</footer>
 </body>
 </html>

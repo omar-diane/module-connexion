@@ -2,8 +2,31 @@
     font-style: italic;
 }
 
+/* Page d'accueil*/
+header {
+    background-color: black;
+}
+
+header nav a {
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    -webkit-transition: color 1s;
+    transition: color 1s;
+    padding: 20px;
+}
+
+header nav a:hover {
+    color: #d2483c;
+}
+
+section h1 {
+    margin-left: 20px;
+}
+
+
+/*Page connexion et inscription*/
 body {
-    background-image:url(images/montagne.png) ;
     margin: 0;
     padding: 0;
 }
@@ -73,5 +96,7 @@ header nav a:hover {
   }
 
   footer {
-      background-color: black;
+      background-color: white;
+      text-decoration: none;
+      color: white;
   }

@@ -43,6 +43,7 @@ if (isset($_POST['connexion']) && $_POST['connexion'] == 'Connexion') {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acceuil</title>
+    <link rel="stylesheet" href="moduleconnexion.css">
 </head>
 <body>
     <header>
