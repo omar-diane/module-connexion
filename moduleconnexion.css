@@ -20,10 +20,16 @@ header nav a:hover {
     color: #d2483c;
 }
 
-section h1 {
-    margin-left: 20px;
+main .pics img {
+    width: 350px;
+    margin-left: 50px;
 }
 
+footer {
+    background-color: black;
+    text-decoration: none;
+    color: white;
+}
 
 /*Page connexion et inscription*/
 body {
@@ -96,7 +102,7 @@ header nav a:hover {
   }
 
   footer {
-      background-color: white;
+      background-color: black;
       text-decoration: none;
       color: white;
   }

@@ -11,7 +11,7 @@
 <header>
         <nav>
             <a href="index.php">Accueil</a>
-            <a href="connexion.php">Coonexion</a>
+            <a href="connexion.php">Connexion</a>
             <a href="#">Inscription</a>
         </nav>
     </header>
@@ -34,15 +34,15 @@ if (isset($_REQUEST['login'], $_REQUEST['name'], $_REQUEST['prenom'], $_REQUEST[
     $password = stripslashes($_REQUEST['password']);
     $password = mysqli_real_escape_string($conn, $password);
 
-    $query = "INSERT into utilisateurs (login, name, prenom, password)
-        VALUES ('$login', '$name', '$prenom', '".hash('sha256', $password)."')";
+    $query = "INSERT into utilisateurs (login, prenom, name, password)
+        VALUES ('$login', '$prenom', '$name', '".hash('sha256', $password)."')";
 
 $res = mysqli_query($conn, $query);
 if($res){
-   echo "<div class='sucess'>
-         <h3>Vous êtes inscrit avec succès.</h3>
-         <p>Cliquez ici pour vous <a href='connexion.php'>connecter</a></p>
-   </div>";
+  echo "<div class='sucess'>
+  <h3>Vous êtes inscrit avec succès.</h3>
+  <p>Cliquez ici pour vous <a href= 'connexion.php'>connecter</a></p>
+</div>";
 }
 }else{
 ?>

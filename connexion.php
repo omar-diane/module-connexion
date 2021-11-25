@@ -11,7 +11,7 @@
 <header>
         <nav>
             <a href="index.php">Accueil</a>
-            <a href="#">Coonexion</a>
+            <a href="#">Connexion</a>
             <a href="inscription.php">Inscription</a>
         </nav>
     </header>

@@ -49,7 +49,7 @@ if (isset($_POST['connexion']) && $_POST['connexion'] == 'Connexion') {
     <header>
         <nav>
             <a href="#">Acceuil</a>
-            <a href="connexion.php">Coonexion</a>
+            <a href="connexion.php">Connexion</a>
             <a href="inscription.php">Inscription</a>
         </nav>
     </header>
@@ -70,6 +70,12 @@ if (isset($_POST['connexion']) && $_POST['connexion'] == 'Connexion') {
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit molestias fugiat quisquam cum? Autem illum veniam unde inventore hic iure quidem, dolores repellat vero, consequuntur praesentium provident! Soluta, et nesciunt.
             </p>
         </section>
+
+        <div class="pics">
+            <img src="images/montagne.png" alt="">
+            <img src="images/montagne.png" alt="">
+            <img src="images/montagne.png" alt="">
+        </div>
 <?php
 if (isset($erreur)) echo '<br /><br />',$erreur;
 ?>
