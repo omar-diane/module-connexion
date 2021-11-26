@@ -33,6 +33,7 @@ footer {
 
 /*Page connexion et inscription*/
 body {
+    background-image: url(images/montagne.png);
     margin: 0;
     padding: 0;
 }
@@ -52,6 +53,11 @@ header nav a {
 
 header nav a:hover {
     color: #d2483c;
+}
+
+.sucess h3 {
+    margin-left: 10px;
+    font-size: 20px;
 }
 
 .box {
@@ -105,4 +111,5 @@ header nav a:hover {
       background-color: black;
       text-decoration: none;
       color: white;
+      bottom: 0;
   }

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion</title>
-    <link rel="stylesheet" href="moduleconnexion.css">
+    <link rel="stylesheet" href="moduleconnexion.css" type="text/css">
 </head>
 <body class='main'>
 <header>
@@ -19,29 +19,25 @@
     require('config.php');
 
     session_start();
-if (isset($_POST['username'])){
+if (isset($_POST['login'])){
   $login = stripslashes($_REQUEST['login']);
   $login = mysqli_real_escape_string($conn, $login);
   $_SESSION['login'] = $login;
   $password = stripslashes($_REQUEST['password']);
   $password = mysqli_real_escape_string($conn, $password);
-    $query = "SELECT * FROM `utilisateurs` WHERE login='tomvarchar13' 
+
+    $query = "SELECT * FROM `utilisateurs` WHERE login='$login' 
   and password='".hash('sha256', $password)."'";
   
-  $result = mysqli_query($conn,$query) or die(mysql_error());
+  $result = mysqli_query($conn,$query);
 
-  if (mysqli_num_rows($result) == 1) {
-    $user = mysqli_fetch_assoc($result);
-    // vérifier si l'utilisateur est un administrateur ou un utilisateur
-    if ($user['type'] == 'admin') {
-      header('location: admin.php');      
-    }else{
-      header('location: index.php');
-    }
-  }else{
-    $message = "Le nom d'utilisateur ou le mot de passe est incorrect.";
+  $rows = mysqli_num_rows($result);
+  if($rows==1) {
+    $_SESSION['login'] = $login;
+    header('location: index.php');
+  } else {
+    $message = "Le nom d'utilisateur ou le mot de passe est incorrecte";
   }
-}
 ?>
 <main>
 <form class="box" action="" method="post" name="login">
