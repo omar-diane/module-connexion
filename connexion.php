@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion</title>
-    <link rel="stylesheet" href="moduleconnexion.css" type="text/css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connexion</title>
 </head>
 <body class='main'>
 <header>
@@ -16,29 +15,39 @@
         </nav>
     </header>
     <?php
+    
     require('config.php');
 
-    session_start();
-if (isset($_POST['login'])){
-  $login = stripslashes($_REQUEST['login']);
-  $login = mysqli_real_escape_string($conn, $login);
-  $_SESSION['login'] = $login;
-  $password = stripslashes($_REQUEST['password']);
-  $password = mysqli_real_escape_string($conn, $password);
+    if(!empty($_POST['login'])&& !empty($_POST['password'])){
+      $login = htmlspecialchars($_POST['login']);
+      $password = htmlspecialchars($_POST['password']);
 
-    $query = "SELECT * FROM `utilisateurs` WHERE login='$login' 
-  and password='".hash('sha256', $password)."'";
-  
-  $result = mysqli_query($conn,$query);
+      $check = $conn->prepare('SELECT login, password, token FROM utilisateurs WHERE login = ?');
+        $check->execute(array($login));
+        $data = $check->fetch();
+        $row = $check->rowCount();
+        
+        
 
-  $rows = mysqli_num_rows($result);
-  if($rows==1) {
-    $_SESSION['login'] = $login;
-    header('location: index.php');
-  } else {
-    $message = "Le nom d'utilisateur ou le mot de passe est incorrecte";
-  }
-?>
+        // Si > à 0 alors l'utilisateur existe
+        if($row > 0)
+        {
+            // Si le mail est bon niveau format
+            if(filter_var($login, FILTER_VALIDATE_LOGIN))
+            {
+                // Si le mot de passe est le bon
+                if(password_verify($password, $data['password']))
+                {
+                    // On créer la session et on redirige sur landing.php
+                    $_SESSION['user'] = $data['token'];
+                    header('Location: profil.php');
+                    die();
+                }else{ header('Location: connexion.php?login_err=password'); die(); }
+            }else{ header('Location: connexion.php?login_err=email'); die(); }
+        }else{
+          header('location: index.php');
+        } // si le formulaire est envoyé sans aucune données
+    ?>
 <main>
 <form class="box" action="" method="post" name="login">
 <h1 class="box-title">Connexion</h1>
@@ -48,9 +57,6 @@ if (isset($_POST['login'])){
 <p class="box-register">Vous êtes nouveau ici? 
   <a href="inscription.php">S'inscrire</a>
 </p>
-<?php if (! empty($message)) { ?>
-    <p class="errorMessage"><?php echo $message; ?></p>
-<?php } ?>
 </form>
 </main>
 <footer>
