@@ -47,7 +47,7 @@ if(isset($res)){
 }else{
 ?>
 <form class="box" action="" method="post">
-    <h1 class="box-title">S'inscrire</h1>
+    <h1 class="box-title">S'inscrire.</h1>
   <input type="text" class="box-input" name="login" 
   placeholder="Login" required />
   
