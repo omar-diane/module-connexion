@@ -7,7 +7,7 @@
     <title>Inscription</title>
     <link rel="stylesheet" href="moduleconnexion.css">
 </head>
-<body>
+<body class="main2">
 <header>
         <nav>
             <a href="index.php">Accueil</a>
