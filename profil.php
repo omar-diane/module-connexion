@@ -10,7 +10,7 @@
 <body>
     <header>
         <nav>
-            <a href="index.php">Accueil</a>
+            <a href="index.php">Accueil.</a>
         </nav>
     </header>
     <main>
