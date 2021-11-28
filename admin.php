@@ -8,6 +8,13 @@
     <link rel="stylesheet" href="moduleconnexion.css">
 </head>
 <body>
+<header>
+        <nav>
+            <a href="index.php">Accueil</a>
+            <a href="connexion.php">Connexion</a>
+            <a href="#">Inscription</a>
+        </nav>
+    </header>
 <?php
 require('config.php');
 if (isset($_REQUEST['login'], $_REQUEST['name'], $_REQUEST['prenom'], $_REQUEST['password'])){
