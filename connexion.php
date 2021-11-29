@@ -10,39 +10,35 @@
 <body class='main'>
 <header>
         <nav>
-            <a href="index.php">Acceuil</a>
+            <a href="index.php">Accuexil</a>
             <a href="#">Coonexion</a>
             <a href="inscription.php">Inscription</a>
         </nav>
     </header>
     <?php
+
     require('config.php');
 
-    session_start();
-if (isset($_POST['login'])){
-  $login = stripslashes($_REQUEST['login']);
-  $login = mysqli_real_escape_string($conn, $login);
-  $_SESSION['login'] = $login;
-  $password = stripslashes($_REQUEST['password']);
-  $password = mysqli_real_escape_string($conn, $password);
-    $query = "SELECT * FROM `utilisateurs` WHERE login='$login' 
-  and password='".hash('sha256', $password)."'";
+    $sql = "SELECT * FROM utilisateurs" ;
+$query = $conn->query($sql);
+$users = $query->fetch_all();
 
-  $result = mysqli_query($conn,$query) or die(mysql_error());
+session_start();
 
-  if (mysqli_num_rows($result) == 1) {
-    $utilisateurs = mysqli_fetch_assoc($result);
-    // vérifier si l'utilisateur est un administrateur ou un utilisateur
-    if ($utilisateurs['login'] == 'admin') {
-      header('location: admin.php');      
-    }else{
-      header('location: index.php');
+$_SESSION["connected"];
+foreach($users as $user){
+    if ( isset($_POST["login"]) && $_POST["login"] == $user[1] && password_verify($_POST['password'],$user[4]) == true){
+        $_SESSION["connected"] = $_POST["login"] ;
+        header("Location:index.php");
     }
-  }else{
-    $message = "Le nom d'utilisateur ou le mot de passe est incorrect.";
-  }
+    if ( isset($_POST["login"]) && $_POST["login"] == $user[1] && $_POST['password'] == $user[4]){
+        $_SESSION["connected"] = $_POST["login"] ;
+        header("Location:index.php");
+    }
 }
+
 ?>
+
 <form class="box" action="" method="post" name="login">
 <h1 class="box-title">Connexion</h1>
 <input type="text" class="box-input" name="login" placeholder="Login">
@@ -51,9 +47,6 @@ if (isset($_POST['login'])){
 <p class="box-register">Vous êtes nouveau ici? 
   <a href="inscription.php">S'inscrire</a>
 </p>
-<?php if (! empty($message)) { ?>
-    <p class="errorMessage"><?php echo $message; ?></p>
-<?php } ?>
 </form>
 </body>
 </html> 

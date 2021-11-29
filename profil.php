@@ -13,88 +13,30 @@
             <a href="index.php">Accueil</a>
         </nav>
     </header>
+
     <?php
-    session_start();
-    require("config.php");
- 
-    if (!isset($_SESSION['id'])){
-        header('Location: index.php');
-        exit;
-    }
- 
-    // On récupère les informations de l'utilisateur connecté
-    $afficher_profil = $DB->query("SELECT * 
-        FROM utilisateur 
-        WHERE id = ?",
-        array($_SESSION['id']));
-    $afficher_profil = $afficher_profil->fetch();
- 
-    if(!empty($_POST)){
-        extract($_POST);
-        $valid = true;
- 
-        if (isset($_POST['modification'])){
-            $login = htmlentities(trim($login));
-            $nom = htmlentities(trim($nom));
-            $prenom = htmlentities(trim($prenom));
-            $password = htmlentities(strtolower(trim($password)));
 
-            if(empty($login)){
-                $valid = false;
-                $er_login = "Il faut mettre un login"
-            }
- 
-            if(empty($nom)){
-                $valid = false;
-                $er_nom = "Il faut mettre un nom";
-            }
- 
-            if(empty($prenom)){
-                $valid = false;
-                $er_prenom = "Il faut mettre un prénom";
-            }
- 
-            if(empty($password)){
-                $valid = false;
-                $er_password = "Il faut mettre un mot de passe";
- 
-            }elseif(!preg_match("/^[a-z0-9\-_.]+@[a-z]+\.[a-z]{2,3}$/i", $login)){
-                $valid = false;
-                $er_login = "Le login n'est pas valide";
- 
-            }else{
-                $req_login = $DB->query("SELECT login 
-                    FROM utilisateur 
-                    WHERE login = ?",
-                    array($login));
-                $req_login = $req_login->fetch();
- 
-                if ($req_login['login'] <> "" && $_SESSION['login'] != $req_login['login']){
-                    $valid = false;
-                    $er_login = "Ce login existe déjà";
-                }
-            }
- 
-            if ($valid){
- 
-                $DB->insert("UPDATE utilisateur SET login=?, prenom = ?, nom = ?, password = ? 
-                    WHERE id = ?", 
-                    array($login, $prenom, $nom, $password, $_SESSION['id']));
- 
-                $_SESSION['login'] = $login;
-                $_SESSION['nom'] = $nom;
-                $_SESSION['prenom'] = $prenom;
-                $_SESSION['password'] = $password;
- 
-                header('Location:  profil.php');
-                exit;
-            }   
-        }
-    }
-?>
+    session_start();
+    require('config.php');
 
+    if(isset($_SESSION['connected'])){
+        $co_user = $_SESSION['connected'];
+
+        $sql = "SELECT * FROM 'utilisateurs' WHERE 'login' = '$co_user'";
+        $query = $conn->query($sql);
+        $user = $query->fetch_all();
+
+        $sql = "SELECT * FROM 'utilisateurs'";
+        $query = $conn->query($sql);
+        $users = $query->fetch_all();
+
+        $login = $user[0][1];
+        $prenom = $user[0][2];
+        $nom = $user[0][3];
+        $password = $user[0][4];
+    }
+    ?>
     <main>
-        <form action="">
             <h1>Modifier mon Profil</h1>
         <input type="text" class="box-input" name="login" placeholder=" Nouveau login">
         <input type="text" class="box-input" name="name" placeholder="Nouveau nom">
@@ -103,5 +45,43 @@
         <input type="submit" value="Modifier" name="submit" class="box-button">
         </form>
     </main>
+
+    <?php
+
+    if($_POST['submit']=='Envoyer'){
+        if($login == NULL && $prenom == NULL){}
+        else {
+            $login = $_POST['login'];
+            $prenom = $_POST['prenom'];
+            $nom = $_POST['name'];
+            if($login == NULL){
+                $_SESSION['update'] = 0;
+            }
+            if($prenom == NULL){
+                $_SESSION['update'] = 0;
+            }
+            if($nom == NULL){
+                $_SESSION['update'] = 0;
+                $_SESSION['update'] = 3;
+            }
+            else {
+                foreach($users as $users){
+                    if(isset($_POST["login"]) && $_POST["login"] == $users[1] && $_POST["login"] !=$user[0][1]){
+                        $taken = 1;
+                        $_SESSION['update'] = 0;
+                    }
+                }
+                if($taken == false){
+                    $u_login = $user[0][1];
+                    $sql = "UPDATE 'utilisateurs' SET prenom = '$prenom,login = '$login', nom='$nom' WHERE login = '$u_login'";
+                    $query = $conn->query($sql);
+                    $_SESSION['connected'] = $login;
+                    header("Location: profil.php");
+                    $_SESSION['update'] = 1;
+                }
+            }
+        }
+    }
+    ?>
 </body>
 </html>
