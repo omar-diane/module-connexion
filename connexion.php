@@ -13,7 +13,6 @@
             <a href="index.php">Accuexil</a>
             <a href="#">Coonexion</a>
             <a href="inscription.php">Inscription</a>
-            <a href="#">Mon profil</a>
         </nav>
     </header>
     <?php
@@ -35,6 +34,8 @@ foreach($users as $user){
     if ( isset($_POST["login"]) && $_POST["login"] == $user[1] && $_POST['password'] == $user[4]){
         $_SESSION["connected"] = $_POST["login"] ;
         header("Location:index.php");
+    }else {
+        echo "Login ou mot de passe incorrect";
     }
 }
 

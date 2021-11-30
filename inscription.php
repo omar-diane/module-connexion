@@ -16,30 +16,32 @@
         </nav>
     </header>
 
-<?php
-include ("config.php");
-
-if(isset($_REQUEST['login'], $_REQUEST['prenom'], $_REQUEST['name'], $_REQUEST['password'])){
-  $login = stripslashes($_REQUEST['login']);
-  $login =mysqli_real_escape_string($conn, $login);
-  $prenom = stripslashes($_REQUEST['prenom']);
-  $prenom =mysqli_real_escape_string ($conn, $prenom);
-  $name = stripslashes($_REQUEST['name']);
-  $name = mysqli_real_escape_string($conn, $name);
-  $password = stripslashes($_REQUEST['password']);
-  $password =mysqli_real_escape_string ($conn, $password);
-
-  $query = "INSERT INTO utilisateurs (login, prenom, name, password)
-  VALUES ('$login', '$prenom', '$name', '".hash('sha256',  $password)."')";
-
+    <?php
+require('config.php');
+if (isset($_POST['login'], $_POST['nom'], $_POST['prenom'], $_POST['password'])){
+  // récupérer le nom d'utilisateur 
+  $login = stripslashes($_POST['login']);
+  $login = mysqli_real_escape_string($conn, $login); 
+  // récupérer le nom 
+  $nom = stripslashes($_POST['nom']);
+  $nom = mysqli_real_escape_string($conn, $nom);
+  // récupérer le prenom
+  $prenom = stripslashes($_POST['prenom']);
+  $prenom = mysqli_real_escape_string($conn, $prenom);
+  // récupérer le mot de passe 
+  $password = stripslashes($_POST['password']);
+  $password = mysqli_real_escape_string($conn, $password);
+  
+  $query = "INSERT into `utilisateurs` (login, nom, prenom, password)
+        VALUES ('$login', '$nom', 'utilisateurs', '".hash('sha256', $password)."')";
   $res = mysqli_query($conn, $query);
-  if(isset($res)){
-    echo "<div class='sucess'>
-    <h3> Vous êtes inscrit avec succés.</h3>
-    <p>Cliquez ici pour vous <a href='connexion.php>connecter</a></p>
-    </div>";
-  }
-}
+    if($res){
+       echo "<div class='sucess'>
+             <h3>Vous êtes inscrit avec succès.</h3>
+             <p>Cliquez ici pour vous <a href='connexion.php'>connecter</a></p>
+       </div>";
+    }
+}else{
 ?>
 
 <form class="box" action="" method="post">
@@ -67,4 +69,5 @@ if(isset($_REQUEST['login'], $_REQUEST['prenom'], $_REQUEST['name'], $_REQUEST['
   <a href="connexion.php">Connectez-vous ici</a></p>
 </form>
 </body>
+<?php } ?>
 </html>

@@ -74,13 +74,8 @@ footer table .menu-footer a {
 
 /*Page connexion et inscription*/
 .main {
-    background-image: url(images/background1.jpg);
     margin: 0;
     padding: 0;
-}
-
-.main2 {
-    background-image: url(images/background2.jpg);
 }
 
 header {
@@ -103,16 +98,10 @@ header nav a:hover {
 .sucess h3 {
     margin-left: 10px;
     font-size: 20px;
-    color: white;
 }
 
 .sucess p {
     margin-left: 10px;
-    color: white;
-}
-
-.sucess p a {
-    color: white;
 }
 
 .box {
