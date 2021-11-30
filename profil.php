@@ -17,25 +17,30 @@
     <?php
 
     session_start();
-    require('config.php');
+    if(isset($_SESSION['connected'])){}
+        ?>
 
-    if(isset($_SESSION['connected'])){
+        <?php
+
+        require('config.php');
+        $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+
         $co_user = $_SESSION['connected'];
 
-        $sql = "SELECT * FROM 'utilisateurs' WHERE 'login' = '$co_user'";
+        $sql = "SELECT * FROM 'utilisateurs' WHERE 'login' = '$co_user';
         $query = $conn->query($sql);
-        $user = $query->fetch_all();
 
-        $sql = "SELECT * FROM 'utilisateurs'";
+
+        $sql = SELECT * FROM 'utilisateurs'";
         $query = $conn->query($sql);
-        $users = $query->fetch_all();
-
+        $users = $query->fetch_all ();
+       
         $login = $user[0][1];
         $prenom = $user[0][2];
-        $nom = $user[0][3];
+        $name = $user[0][3];
         $password = $user[0][4];
-    }
     ?>
+    
     <main>
             <h1>Modifier mon Profil</h1>
         <input type="text" class="box-input" name="login" placeholder=" Nouveau login">
@@ -48,7 +53,7 @@
 
     <?php
 
-    if($_POST['submit']=='Envoyer'){
+      if($_POST["submit"]=="Modifier"){
         if($login == NULL && $prenom == NULL){}
         else {
             $login = $_POST['login'];

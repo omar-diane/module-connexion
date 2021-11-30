@@ -13,14 +13,15 @@
             <a href="index.php">Accuexil</a>
             <a href="#">Coonexion</a>
             <a href="inscription.php">Inscription</a>
+            <a href="#">Mon profil</a>
         </nav>
     </header>
     <?php
 
     require('config.php');
-
-    $sql = "SELECT * FROM utilisateurs" ;
-$query = $conn->query($sql);
+    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+$sql = "SELECT * FROM utilisateurs";
+$query = $conn->query($sql) ;
 $users = $query->fetch_all();
 
 session_start();
