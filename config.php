@@ -7,6 +7,9 @@ define('DB_NAME', 'moduleconnexion');
  
 // Connexion à la base de données MySQL 
 $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+$req = mysqli_query($conn, "SELECT * FROM utilisateurs");
+$res = mysqli_fetch_all($req);
+
  
 // Vérifier la connexion
 if($conn === false){

@@ -34,13 +34,12 @@ foreach($users as $user){
     if ( isset($_POST["login"]) && $_POST["login"] == $user[1] && $_POST['password'] == $user[4]){
         $_SESSION["connected"] = $_POST["login"] ;
         header("Location:index.php");
-    }else {
-        echo "Login ou mot de passe incorrect";
     }
 }
 
 ?>
 
+<main>
 <form class="box" action="" method="post" name="login">
 <h1 class="box-title">Connexion</h1>
 <input type="text" class="box-input" name="login" placeholder="Login">
@@ -50,5 +49,6 @@ foreach($users as $user){
   <a href="inscription.php">S'inscrire</a>
 </p>
 </form>
+</main>
 </body>
 </html> 

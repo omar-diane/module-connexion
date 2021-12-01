@@ -18,30 +18,48 @@
 
     <?php
 require('config.php');
-if (isset($_POST['login'], $_POST['nom'], $_POST['prenom'], $_POST['password'])){
-  // récupérer le nom d'utilisateur 
-  $login = stripslashes($_POST['login']);
-  $login = mysqli_real_escape_string($conn, $login); 
-  // récupérer le nom 
-  $nom = stripslashes($_POST['nom']);
-  $nom = mysqli_real_escape_string($conn, $nom);
-  // récupérer le prenom
-  $prenom = stripslashes($_POST['prenom']);
-  $prenom = mysqli_real_escape_string($conn, $prenom);
-  // récupérer le mot de passe 
-  $password = stripslashes($_POST['password']);
-  $password = mysqli_real_escape_string($conn, $password);
-  
-  $query = "INSERT into `utilisateurs` (login, nom, prenom, password)
-        VALUES ('$login', '$nom', 'utilisateurs', '".hash('sha256', $password)."')";
-  $res = mysqli_query($conn, $query);
-    if($res){
-       echo "<div class='sucess'>
-             <h3>Vous êtes inscrit avec succès.</h3>
-             <p>Cliquez ici pour vous <a href='connexion.php'>connecter</a></p>
-       </div>";
+
+if  ((isset($_POST['login']) and ($_POST['login']) != '')){
+
+  //check if username already exists
+
+  $login = $_POST['login']; 
+
+  $request = "SELECT login FROM utilisateurs WHERE login = '$login'"; 
+
+  $req = mysqli_query($conn, $request);
+
+  $res = mysqli_fetch_all($req);
+
+  if (mysqli_num_rows($req) != 0){
+    echo '<h4>Ce login existe déjà.</h4>';
+    return;
+  } else { 	
+    if  (   (isset($_POST['prenom']) and ($_POST['prenom']) != '') and
+               (isset($_POST['nom']) and ($_POST['nom']) != '') and
+               (isset($_POST['password']) and ($_POST['password']) != '') and
+              (isset($_POST['pass_conf']) and ($_POST['pass_conf']) != '') )  {	
+            if( $_POST['password'] === $_POST['pass_conf']){
+              if(isset($_POST['submit'])){
+                $login = $_POST['login'];
+                $prenom = $_POST['prenom'];
+                $nom = $_POST['nom']; 
+                $password = $_POST['password'];
+                $status = 0;
+                $statusad =0;
+
+                $request2= " INSERT INTO utilisateurs( login, prenom, nom, password, status, statusad) VALUES ('$login','$prenom','$nom','$password', '$status', '$statusad' ) ";
+
+                $req2 = mysqli_query($conn,$request2);
+
+                header( "Location: connexion.php" );
+
+              }	
+            } 
     }
-}else{
+  }
+}
+
 ?>
 
 <form class="box" action="" method="post">
@@ -69,5 +87,4 @@ if (isset($_POST['login'], $_POST['nom'], $_POST['prenom'], $_POST['password']))
   <a href="connexion.php">Connectez-vous ici</a></p>
 </form>
 </body>
-<?php } ?>
 </html>
