@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -45,10 +45,8 @@ if  ((isset($_POST['login']) and ($_POST['login']) != '')){
                 $prenom = $_POST['prenom'];
                 $nom = $_POST['nom']; 
                 $password = $_POST['password'];
-                $status = 0;
-                $statusad =0;
 
-                $request2= " INSERT INTO utilisateurs( login, prenom, nom, password, status, statusad) VALUES ('$login','$prenom','$nom','$password', '$status', '$statusad' ) ";
+                $request2= " INSERT INTO utilisateurs( login, prenom, nom, password,) VALUES ('$login','$prenom','$nom','$password' ) ";
 
                 $req2 = mysqli_query($conn,$request2);
 
@@ -62,12 +60,12 @@ if  ((isset($_POST['login']) and ($_POST['login']) != '')){
 
 ?>
 
-<form class="box" action="" method="post">
+<form class="box" action="connexion.php" method="POST">
     <h1 class="box-title">S'inscrire.</h1>
   <input type="text" class="box-input" name="login" 
   placeholder="Login" required />
   
-    <input type="text" class="box-input" name="name" 
+    <input type="text" class="box-input" name="nom" 
   placeholder="Nom" required />
   
     <input type="text" class="box-input" name="prenom" 
@@ -76,7 +74,7 @@ if  ((isset($_POST['login']) and ($_POST['login']) != '')){
   <input type="password" class="box-input" name="password" 
   placeholder="Mot de passe" required />
 
-  <input type="password" class="box-input" name="pass_confirm" 
+  <input type="password" class="box-input" name="pass_conf" 
   placeholder="Confirmation du mot de passe" required />
 
 
