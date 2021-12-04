@@ -25,7 +25,7 @@ $users = $query->fetch_all();
 
 session_start();
 
-$_SESSION["connected"];
+$_SESSION["conn"];
 foreach($users as $user){
     if ( isset($_POST["login"]) && $_POST["login"] == $user[1] && password_verify($_POST['password'],$user[4]) == true){
         $_SESSION["connected"] = $_POST["login"] ;

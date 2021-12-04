@@ -17,50 +17,27 @@
     </header>
 
     <?php
-require('config.php');
-
-if  ((isset($_POST['login']) and ($_POST['login']) != '')){
-
-  //check if username already exists
-
-  $login = $_POST['login']; 
-
-  $request = "SELECT login FROM utilisateurs WHERE login = '$login'"; 
-
-  $req = mysqli_query($conn, $request);
-
-  $res = mysqli_fetch_all($req);
-
-  if (mysqli_num_rows($req) != 0){
-    echo '<h4>Ce login existe déjà.</h4>';
-    return;
-  } else { 	
-    if  (   (isset($_POST['prenom']) and ($_POST['prenom']) != '') and
-               (isset($_POST['nom']) and ($_POST['nom']) != '') and
-               (isset($_POST['password']) and ($_POST['password']) != '') and
-              (isset($_POST['pass_conf']) and ($_POST['pass_conf']) != '') )  {	
-            if( $_POST['password'] === $_POST['pass_conf']){
-              if(isset($_POST['submit'])){
-                $login = $_POST['login'];
-                $prenom = $_POST['prenom'];
-                $nom = $_POST['nom']; 
-                $password = $_POST['password'];
-
-                $request2= " INSERT INTO utilisateurs( login, prenom, nom, password,) VALUES ('$login','$prenom','$nom','$password' ) ";
-
-                $req2 = mysqli_query($conn,$request2);
-
-                header( "Location: connexion.php" );
-
-              }	
-            } 
+    require('config.php');
+     
+if (isset($_POST['submit']))
+{
+   /* on test si les champ sont bien remplis */
+    if(!empty($_POST['login']) and !empty($_POST['prenom']) and !empty($_POST['nom']) and !empty($_POST['password']) and !empty($_POST['pass_conf']))
+    {
+            /* on test si les deux mdp sont bien identique */
+            if ($_POST['password']==$_POST['pass_conf'])
+            {
+                // On crypte le mot de passe
+                $_POST['password']= md5($_POST['password']);
+                //On créé la requête
+                $sql = "INSERT INTO utilisateurs VALUES (login, preom, nom, password)";
+            }
+            else echo "Les mots de passe ne sont pas identiques";
+        }
     }
-  }
-}
-
 ?>
-
-<form class="box" action="connexion.php" method="POST">
+<main>
+<form class="box" action="" method="POST">
     <h1 class="box-title">S'inscrire.</h1>
   <input type="text" class="box-input" name="login" 
   placeholder="Login" required />
@@ -84,5 +61,6 @@ if  ((isset($_POST['login']) and ($_POST['login']) != '')){
     <p class="box-register">Déjà inscrit? 
   <a href="connexion.php">Connectez-vous ici</a></p>
 </form>
+</main>
 </body>
 </html>
