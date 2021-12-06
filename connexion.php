@@ -10,7 +10,7 @@
 <body class='main'>
 <header>
         <nav>
-            <a href="index.php">Accuexil</a>
+            <a href="index.php">Accueil</a>
             <a href="#">Coonexion</a>
             <a href="inscription.php">Inscription</a>
         </nav>
@@ -33,7 +33,7 @@ foreach($users as $user){
     }
     if ( isset($_POST["login"]) && $_POST["login"] == $user[1] && $_POST['password'] == $user[4]){
         $_SESSION["connected"] = $_POST["login"] ;
-        header("Location:index.php");
+        header("Location:profil.php");
     }
 }
 

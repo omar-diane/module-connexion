@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Nov 25, 2021 at 06:14 AM
--- Server version: 5.7.31
--- PHP Version: 7.3.21
- 
+-- Hôte : 127.0.0.1:3306
+-- Généré le :  lun. 06 déc. 2021 à 09:04
+-- Version du serveur :  10.4.10-MariaDB
+-- Version de PHP :  7.3.12
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `moduleconnexion`
+-- Base de données :  `moduleconnexion`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `utilisateurs`
+-- Structure de la table `utilisateurs`
 --
 
 DROP TABLE IF EXISTS `utilisateurs`;
@@ -35,23 +36,18 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
   `nom` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=116 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `utilisateurs`
+-- Déchargement des données de la table `utilisateurs`
 --
 
 INSERT INTO `utilisateurs` (`id`, `login`, `prenom`, `nom`, `password`) VALUES
-(115, 'gidi', 'digi', 'tree', '5678'),
-(114, 'mina', 'bibi', 'bubi', '5678'),
-(1, 'admin', 'admin', 'admin', 'admin');
+(1, 'tomvarchar13', 'Tom', 'Varchar', 'Tvorcahr2151'),
+(2, 'omar-diane', 'Omar', 'DIANE', '12346789'),
+(3, 'Totodu13', 'Toto', 'JEAN', '12345');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-© 2021 GitHub, Inc.
-Terms
-Privacy
-Security
-Status

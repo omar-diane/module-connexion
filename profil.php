@@ -36,7 +36,7 @@ if(!empty($_POST)){
 ?>
     <main>
     <form class="box" action="" method="post" name="login">
-<h1 class="box-title">Modifer mon profil</h1>
+<h1 class="box-title">Modifier mon profil</h1>
 <input type="text" class="box-input" name="login" placeholder="Login">
 <input type="text" class="box-input" name="nom" placeholder="Nom">
 <input type="text" class="box-input" name="prenom" placeholder="Prénom">
