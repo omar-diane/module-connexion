@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,10 +30,10 @@ if(!empty($_POST['login']) and !empty($_POST['password'])){
 
     $login = $_POST['login'];
 
-    $sql = "SELECT login, password FROM utilisateurs WHERE login = '$login' ";
+    $sql = "SELECT login, password, id FROM utilisateurs WHERE login = '$login' ";
     $query = $conn->query($sql) ;
     $res = mysqli_fetch_row($query);
-
+    
     if($_POST['login'] === $res[0] and $_POST['login'] !== 'admin' ){
         $utilcheck++;
     } elseif ( $_POST['login'] === 'admin' ){
@@ -42,9 +46,10 @@ if(!empty($_POST['login']) and !empty($_POST['password'])){
     }
     if($utilcheck === 2){
         $_SESSION['connected']= $_POST['login'];
-        header('Location: profil.php');
+        $_SESSION['id']=$res[2];
+    header('Location: profil.php');
     } elseif ($admin === 2){
-        $_SESSION['connected']= $_POST['login'];
+        $_SESSION['adconnected']= $_POST['login'];
         header('Location: admin.php');
     }
 } 

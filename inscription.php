@@ -31,7 +31,7 @@ require('config.php');
                 if ($_POST['password']===$_POST['pass_conf'])
                 {
                     // On crypte le mot de passe
-                    $password==($_POST['password']);
+                    $password=($_POST['password']);
 
                     // On prend tous nos valeurs des $_POST
                     $login= $_POST['login'];
