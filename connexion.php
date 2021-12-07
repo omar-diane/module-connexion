@@ -45,8 +45,7 @@ if(!empty($_POST['login']) and !empty($_POST['password'])){
         $admin++;
     }
     if($utilcheck === 2){
-        $_SESSION['connected']= $_POST['login'];
-        $_SESSION['id']=$res[2];
+        $_SESSION['connected']=$res[2];
     header('Location: profil.php');
     } elseif ($admin === 2){
         $_SESSION['adconnected']= $_POST['login'];

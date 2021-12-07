@@ -21,12 +21,10 @@ session_start();
 
     <?php
     require('config.php');
-$id=$_SESSION['id'];
+$id=$_SESSION['connected'];
     $query="SELECT * FROM utilisateurs WHERE id='$id'";
     $req=mysqli_query($conn,$query);
     $res=mysqli_fetch_all($req,MYSQLI_ASSOC);
-
-
 
     ?>
    
@@ -41,12 +39,24 @@ $id=$_SESSION['id'];
 </form>
 <?php
 
-$login = $_POST['login'];
-$prenom = $_POST['prenom'];
-$password = $_POST['password'];
 
-$sql = "UPDATE "
+if(!empty($_POST['login'])and
+   !empty($_POST['prenom'])and
+   !empty($_POST['nom'])and
+   !empty($_POST['password'])){
+
+       if(isset($_POST['submit'])){
+        $login = $_POST['login'];
+        $prenom = $_POST['prenom'];
+        $nom = $_POST['nom'];
+        $password = $_POST['password'];
+        
+        $sql = "UPDATE utilisateurs SET login='$login', prenom='$prenom', nom='$nom', password='$password' WHERE id='$id'";
+        $req=mysqli_query($conn,$sql);
+       }
+   }
 ?>
+<a href="logout.php">Déconnexion</a>
     </main>
     
 </body>
