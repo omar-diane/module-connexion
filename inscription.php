@@ -17,22 +17,33 @@
     </header>
 
     <?php
-    require('config.php');
+require('config.php');
      
-if (isset($_POST['submit']))
-{
    /* on test si les champ sont bien remplis */
-    if(!empty($_POST['login']) and !empty($_POST['prenom']) and !empty($_POST['nom']) and !empty($_POST['password']) and !empty($_POST['pass_conf']))
-    {
-            /* on test si les deux mdp sont bien identique */
-            if ($_POST['password']==$_POST['pass_conf'])
-            {
-                // On crypte le mot de passe
-                $_POST['password']= md5($_POST['password']);
-                //On créé la requête
-                $sql = "INSERT INTO utilisateurs VALUES (login, preom, nom, password)";
-            }
-            else echo "Les mots de passe ne sont pas identiques";
+    if( !empty($_POST['login']) and !empty($_POST['prenom']) and 
+        !empty($_POST['nom']) and !empty($_POST['password']) and 
+        !empty($_POST['pass_conf']) ){
+
+        if (isset($_POST['submit']))
+        {
+
+                /* on test si les deux mdp sont bien identique */
+                if ($_POST['password']===$_POST['pass_conf'])
+                {
+                    // On crypte le mot de passe
+                    $password==($_POST['password']);
+
+                    // On prend tous nos valeurs des $_POST
+                    $login= $_POST['login'];
+                    $nom= $_POST['nom'];
+                    $prenom= $_POST['prenom'];
+
+
+                    //On créé la requête
+                    $sql = "INSERT INTO utilisateurs( login, prenom, nom, password) VALUES ('$login','$prenom','$nom','$password')";
+                    $req=mysqli_query($conn,$sql);
+                }
+                else echo "Les mots de passe ne sont pas identiques";
         }
     }
 ?>

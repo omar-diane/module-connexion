@@ -11,31 +11,45 @@
 <header>
         <nav>
             <a href="index.php">Accueil</a>
-            <a href="#">Coonexion</a>
+            <a href="#">Conexion</a>
             <a href="inscription.php">Inscription</a>
         </nav>
     </header>
     <?php
 
-    require('config.php');
-    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-$sql = "SELECT * FROM utilisateurs";
-$query = $conn->query($sql) ;
-$users = $query->fetch_all();
+require('config.php');
 
-session_start();
+$utilcheck=0;
+$admin=0;
 
-$_SESSION["conn"];
-foreach($users as $user){
-    if ( isset($_POST["login"]) && $_POST["login"] == $user[1] && password_verify($_POST['password'],$user[4]) == true){
-        $_SESSION["connected"] = $_POST["login"] ;
-        header("Location:index.php");
+if(!empty($_POST['login']) and !empty($_POST['password'])){
+
+    $login = $_POST['login'];
+
+    $sql = "SELECT login, password FROM utilisateurs WHERE login = '$login' ";
+    $query = $conn->query($sql) ;
+    $res = mysqli_fetch_row($query);
+
+    if($_POST['login'] === $res[0] and $_POST['login'] !== 'admin' ){
+        $utilcheck++;
+    } elseif ( $_POST['login'] === 'admin' ){
+        $admin++;
     }
-    if ( isset($_POST["login"]) && $_POST["login"] == $user[1] && $_POST['password'] == $user[4]){
-        $_SESSION["connected"] = $_POST["login"] ;
-        header("Location:profil.php");
+    if($_POST['password'] === $res[1] and $_POST['password'] !== 'admin'){
+        $utilcheck++;
+    } elseif ( $_POST['password'] === 'admin' ){
+        $admin++;
     }
-}
+    if($utilcheck === 2){
+        $_SESSION['connected']= $_POST['login'];
+        header('Location: profil.php');
+    } elseif ($admin === 2){
+        $_SESSION['connected']= $_POST['login'];
+        header('Location: admin.php');
+    }
+} 
+
+
 
 ?>
 
