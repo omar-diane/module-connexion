@@ -40,7 +40,7 @@ if (isset($erreur)) echo '<br /><br />',$erreur;
 ?>
     </main>
     <footer>
-        <a href="#">Github</a>
+        <a href="https://github.com/omar-diane/module-connexion">Github</a>
         <table>
     <tbody>
         <tr class="menu-footer">
