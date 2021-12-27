@@ -70,6 +70,7 @@ if(!empty($_POST['login'])and
     }
 }
 ?>
+<a href="logout.php">Déconnexion</a>
 </main>
 </body>
 </html>
