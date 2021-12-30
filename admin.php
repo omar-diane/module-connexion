@@ -15,8 +15,7 @@ session_start();
 <header>
         <nav>
             <a href="index.php">Accueil</a>
-            <a href="connexion.php">Connexion</a>
-            <a href="inscription">Inscription</a>
+            <?php include "header.php";?>
         </nav>
     </header>
 <main id="admin">

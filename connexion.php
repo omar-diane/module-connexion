@@ -15,7 +15,7 @@ session_start();
 <header>
         <nav>
             <a href="index.php">Accueil</a>
-            <a href="#">Conexion</a>
+            <a href="#">Connexion</a>
             <a href="inscription.php">Inscription</a>
         </nav>
     </header>
@@ -51,6 +51,9 @@ if(!empty($_POST['login']) and !empty($_POST['password'])){
         $_SESSION['adconnected']= $_POST['login'];
         header('Location: admin.php');
     }
+} 
+if(isset($_SESSION['connected']) && $_SESSION['connected'] == TRUE) {
+ 
 } 
 
 
