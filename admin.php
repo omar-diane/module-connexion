@@ -3,7 +3,7 @@ session_start();
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -69,7 +69,6 @@ if(!empty($_POST['login'])and
     }
 }
 ?>
-<a href="logout.php">Déconnexion</a>
 </main>
 </body>
 </html>

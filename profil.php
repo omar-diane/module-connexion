@@ -16,6 +16,7 @@ session_start();
 <header>
         <nav>
             <a href="index.php">Accueil</a>
+            <?php include "header.php"; ?>
         </nav>
     </header>
 
@@ -56,7 +57,6 @@ if(!empty($_POST['login'])and
        }
    }
 ?>
-<a href="logout.php">Déconnexion</a>
     </main>
     
 </body>

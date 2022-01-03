@@ -52,10 +52,6 @@ if(!empty($_POST['login']) and !empty($_POST['password'])){
         header('Location: admin.php');
     }
 } 
-if(isset($_SESSION['connected']) && $_SESSION['connected'] == TRUE) {
- 
-} 
-
 
 
 ?>

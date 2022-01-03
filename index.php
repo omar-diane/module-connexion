@@ -10,7 +10,7 @@
 <body>
     <header>
         <nav>
-            <a href="#">Acceuil</a>
+            <a href="#">Accueil</a>
             <a href="connexion.php">Connexion</a>
             <a href="inscription.php">Inscription</a>
         </nav>
