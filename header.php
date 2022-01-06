@@ -17,6 +17,7 @@ if($utilcheck === 2){
       echo "<a href='logout.php'> Déconnexion </a>";
    } else {
       echo"<a href='connexion.php'> Connexion </a>";
+      echo"<a href='inscription.php'> Inscription </a>";
    }
 
    if(isset($_POST['logout'])){

@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -11,8 +14,19 @@
     <header>
         <nav>
             <a href="#">Accueil</a>
-            <a href="connexion.php">Connexion</a>
-            <a href="inscription.php">Inscription</a>
+            <?php
+
+if(isset($_SESSION["adconnected"])){
+    echo "<a href='admin.php'> Admin </a>";
+    echo "<a href='logout.php'> Déconnexion </a>";
+ } elseif (isset($_SESSION["connected"])) {
+    echo "<a href='profil.php'> Mon profil </a>";
+    echo "<a href='logout.php'> Déconnexion </a>";
+ } else {
+    echo"<a href='connexion.php'> Connexion </a>";
+    echo"<a href='inscription.php'> Inscription </a>";
+ }
+ ?>
         </nav>
     </header>
     <main>
